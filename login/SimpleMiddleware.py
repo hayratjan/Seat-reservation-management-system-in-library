@@ -19,10 +19,10 @@ class SimpleMiddleware:
         """
         # 允许后台不登录情况下访问的路径
         urllist = ['/', '/logout/', '/login/', '/login/register/']
-        if re.match(r'^/', path) and (path not in urllist):
+        stu_list = ['/Bookings/']
+        if re.match(r'/index/', path) and (path not in urllist):
             # 重定向到登录页
             if 'name' not in request.session:
                 return redirect(reverse("login"))
-
         response = self.get_response(request)
         return response

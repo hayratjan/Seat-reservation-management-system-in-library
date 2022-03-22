@@ -27,7 +27,53 @@
                     <h5>座位号：{{ i.number }}</h5>
                     <p class="lead text-center">请保持良好的学习环境！</p>
                     <p class="text-center">
-                        <a href="{% url 'recording' %}?id={{ i.id }}" class="btn btn-outline-success">取消预约</a>
+                        {% if i.time.day == day %}
+                            <a type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                               data-bs-target="#exampleModal-{{ i.id }}">取消预约</a>
+
+
+
+                            <!-- Button trigger modal -->
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal-{{ i.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">请确认一下信息！</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="h5">你确定取消吗？</p>
+                                            <p>日期：{{ i.time | date }}</p>
+                                            <p>自习室：{{ i.room.name }}</p>
+                                            <p>座位号：{{ i.number }}</p>
+                                            <p>时间：
+                                                {% if i.period == 1 %}
+                                                    上午
+                                                {% elif i.period == 2 %}
+                                                    下午
+                                                {% elif i.period == 3 %}
+                                                    晚上
+                                                {% endif %}</p>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                取消
+                                            </button>
+                                            <a href="{% url 'recording' %}?id={{ i.id }}" class="btn btn-danger">确定</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% else %}
+                        {% endif %}
                     </p>
 
                 </div>

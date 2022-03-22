@@ -6,12 +6,7 @@ from login.models import *
 
 
 # Create your views here.
-def index(request):
-    try:
-        text = Text.objects.filter(is_active=True).order_by('time')
-    except Exception as e:
-        print(e)
-    return render(request, 'index/index.html', {"text": text})
+
 
 
 def bookings(request):
@@ -76,13 +71,13 @@ def seat(request, id):
                                                        "rooms": rooms,
                                                        "room_id": room.id})
     elif request.method == 'POST':
-        room = request.POST['room']
+        room_1 = request.POST['room']
         number = request.POST['number']
         period = request.POST['time']
         name = request.session.get("name")
         name = name['name']
         day = request.POST['day']
-        print(room, number, period, day, name)
+        # print(room, number, period, day, name)
         # 日期判断
         d1 = timezone.now()
         time = int(d1.day)
@@ -90,18 +85,36 @@ def seat(request, id):
             day = time
         elif day == 2:
             day = time + 1
+
+        # 判断本人有没有已经预约了座位
+        name = request.session.get('name')
+        name = name['name']
         try:
             student = Students.objects.get(name=name)
-            booking = Bookings.objects.create(
-                students=student,
-                number=number,
-                room_id=room,
-                period=period
+            book = Bookings.objects.filter(
+                students_id=student.id,
+                time__day=time,
+                period=period,
+                is_active=True)
 
-            )
         except Exception as e:
             print(e)
-        return HttpResponseRedirect('/recording/')
+        if book:
+            msg = "alert"
+            return render(request, 'index/seat.html', {"rooms": rooms, "room": room, "room_id": room.id, "msg": msg})
+        else:
+            try:
+                student = Students.objects.get(name=name)
+                booking = Bookings.objects.create(
+                    students=student,
+                    number=number,
+                    room_id=room_1,
+                    period=period
+
+                )
+            except Exception as e:
+                print(e)
+            return HttpResponseRedirect('/recording/')
 
 
 def recording(request):
@@ -121,7 +134,7 @@ def recording(request):
         booking = Bookings.objects.filter(is_active=True, students_id=student).order_by('-time')
     except Exception as e:
         print(e)
-        print(booking)
+
     # 日期判断
     d1 = timezone.now()
     day = int(d1.day)

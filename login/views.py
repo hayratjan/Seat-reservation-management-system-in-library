@@ -83,3 +83,11 @@ def logout(request):
         del request.session['name']
 
     return HttpResponseRedirect('/login/')
+
+
+def index(request):
+    try:
+        text = Text.objects.filter(is_active=True).order_by('time')
+    except Exception as e:
+        print(e)
+    return render(request, 'index/index.html', {"text": text})
