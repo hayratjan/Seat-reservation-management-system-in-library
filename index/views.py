@@ -114,7 +114,7 @@ def seat(request, id):
                 )
             except Exception as e:
                 print(e)
-            return HttpResponseRedirect('/recording/')
+            return HttpResponseRedirect('/index/recording/')
 
 
 def recording(request):
@@ -128,7 +128,7 @@ def recording(request):
             print(e)
         booking.is_active = False
         booking.save()
-        return HttpResponseRedirect("/recording/")
+        return HttpResponseRedirect("/index/recording/")
     try:
         student = Students.objects.get(name=student).id
         booking = Bookings.objects.filter(is_active=True, students_id=student).order_by('-time')
