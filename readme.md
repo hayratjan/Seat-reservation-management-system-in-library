@@ -1,7 +1,13 @@
  **
 
 ### 图书馆座位预约管理系统
-** 
+
+## 相关技术
+  ![Python](https://img.shields.io/badge/python-3.10-orange?style=for-the-badge&logo=python&logoColor=orange)
+  ![Django](https://img.shields.io/badge/django-4.0-blue?style=for-the-badge&logo=django&logoColor=blue)
+  ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1-blueviolet?style=for-the-badge&logo=Bootstrap&logoColor=blueviolet)
+
+
 ### 主要功能
 
  **1. 学生** 
