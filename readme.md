@@ -1,16 +1,16 @@
  **
 
-### 图书馆座位预约管理系统
+### 图书馆座位预约管理系统😎
 
-## 相关技术
+## 相关技术🛹
   ![Python](https://img.shields.io/badge/python-3.10-orange?style=for-the-badge&logo=python&logoColor=orange)
   ![Django](https://img.shields.io/badge/django-4.0-blue?style=for-the-badge&logo=django&logoColor=blue)
   ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1-blueviolet?style=for-the-badge&logo=Bootstrap&logoColor=blueviolet)
 
 
-### 主要功能
+### 主要功能🍳
 
- **1. 学生** 
+ #### **1. 学生👨🏽‍🎓** 
 
 - 登录、注册
 - 查看空座位
@@ -19,7 +19,7 @@
 - 查看警告
 - 修改密码
 
- **2.管理员** 
+#### **2.管理员👨🏽‍💻** 
 
 - 修改密码
 - 管理自习室
